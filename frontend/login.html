@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sahayak Auth</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+<div class="container" id="container">
+
+  <!-- IMAGE -->
+  <div class="image-section"></div>
+
+  <!-- FORM SECTION -->
+  <div class="form-section">
+
+    <!-- LOGIN -->
+    <div class="form login">
+      <h2>Login</h2>
+
+      <input type="text" placeholder="Email / Username">
+      <input type="password" placeholder="Password">
+
+      <button>Login</button>
+
+      <div class="link">
+        <a href="#">Forgot Password?</a>
+      </div>
+
+      <div class="link">
+        Don't have account? 
+        <a href="#" onclick="toggle()">Create Account</a>
+      </div>
+    </div>
+
+    <!-- SIGNUP -->
+    <div class="form signup">
+      <h2>Create Account</h2>
+
+      <input type="text" placeholder="Full Name">
+      <input type="text" placeholder="Username">
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Create Password">
+      <input type="password" placeholder="Confirm Password">
+
+      <button>Create Account</button>
+
+      <div class="link">
+        Already have account? 
+        <a href="#" onclick="toggle()">Login</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function toggle() {
+  document.getElementById("container").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
