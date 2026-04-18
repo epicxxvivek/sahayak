@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking #BK-001 — Sahayak</title>
+  <meta name="description" content="View booking details and chat with your service provider on Sahayak." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/booking.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="navbar-logo-icon"><img src="Gemini_Generated_Image_cjdzr0cjdzr0cjdz (1).png" alt="Sahayak Logo"></div>
+      <span class="navbar-logo-text">Saha<span>yak</span></span>
+    </a>
+    <div class="navbar-links">
+      <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+    </div>
+    <div class="navbar-actions">
+      <a href="dashboard.html" class="btn btn-ghost btn-sm">← Back to Dashboard</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+  <div class="mobile-menu-actions">
+    <a href="dashboard.html" class="btn btn-secondary btn-full">← Back to Dashboard</a>
+  </div>
+</div>
+
+<div class="booking-page" role="main">
+  <div class="booking-container">
+
+    <!-- Booking Detail Card -->
+    <div class="booking-detail">
+
+      <!-- Header -->
+      <div class="booking-detail-header">
+        <div class="booking-detail-top">
+          <div>
+            <p class="booking-id">Booking #BK-2026-001</p>
+            <h1 class="booking-title">Home Wiring Repair</h1>
+          </div>
+          <span class="status-badge status-pending" id="bookingStatus">Pending</span>
+        </div>
+
+        <div class="booking-parties">
+          <div class="booking-party">
+            <div class="booking-party-avi customer">A</div>
+            <div>
+              <p class="booking-party-role">Customer</p>
+              <p class="booking-party-name">Anika Mehta</p>
+            </div>
+          </div>
+          <span class="booking-arrow" aria-hidden="true">→</span>
+          <div class="booking-party">
+            <div class="booking-party-avi">R</div>
+            <div>
+              <p class="booking-party-role">Provider</p>
+              <p class="booking-party-name">Ramesh Kumar</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Grid -->
+      <div class="booking-info-grid" role="region" aria-label="Booking details">
+        <div class="booking-info-item">
+          <p class="booking-info-label">📅 Scheduled For</p>
+          <p class="booking-info-val">April 20, 2026 — 10:00 AM</p>
+        </div>
+        <div class="booking-info-item">
+          <p class="booking-info-label">💰 Agreed Rate</p>
+          <p class="booking-info-val" id="bookingRate">₹300 / hour</p>
+        </div>
+        <div class="booking-info-item">
+          <p class="booking-info-label">📍 Location</p>
+          <p class="booking-info-val">Flat 3B, Kothrud, Pune</p>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="booking-timeline">
+        <p class="timeline-title">Booking Progress</p>
+        <div class="timeline" role="list">
+          <div class="timeline-item done" role="listitem">
+            <div class="timeline-icon">✓</div>
+            <div class="timeline-content">
+              <p class="timeline-label">Booking Requested</p>
+              <p class="timeline-date">April 17, 2026 · 6:30 PM</p>
+            </div>
+          </div>
+          <div class="timeline-item active" id="tlAccepted" role="listitem">
+            <div class="timeline-icon">⏳</div>
+            <div class="timeline-content">
+              <p class="timeline-label">Awaiting Provider Acceptance</p>
+              <p class="timeline-date">Waiting…</p>
+            </div>
+          </div>
+          <div class="timeline-item" id="tlScheduled" role="listitem">
+            <div class="timeline-icon">📅</div>
+            <div class="timeline-content">
+              <p class="timeline-label">Job Scheduled</p>
+              <p class="timeline-date">April 20, 2026 · 10:00 AM</p>
+            </div>
+          </div>
+          <div class="timeline-item" id="tlCompleted" role="listitem">
+            <div class="timeline-icon">🎉</div>
+            <div class="timeline-content">
+              <p class="timeline-label">Job Completed</p>
+              <p class="timeline-date">Pending…</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Notes -->
+      <div class="booking-notes">
+        <p class="booking-notes-label">📝 Customer Notes</p>
+        <div class="booking-notes-text">
+          "The main panel keeps tripping every evening around 6-7 PM. There are also 2 light switches in the bedroom that stopped working last week. Please bring tools for MCB/RCCB replacement just in case. Ground floor flat, easy parking available."
+        </div>
+      </div>
+
+      <!-- Provider: Accept / Reject Actions (shown to providers) -->
+      <div class="provider-booking-actions" id="providerActions">
+        <button class="btn btn-success" id="acceptBookingBtn" type="button">✅ Accept Booking</button>
+        <button class="btn btn-danger"  id="rejectBookingBtn" type="button">✗ Decline</button>
+      </div>
+
+      <!-- Customer: Leave Review (shown after completion) -->
+      <div class="review-form-section" id="reviewSection" style="display:none;">
+        <p class="review-form-title">Leave a Review</p>
+        <div class="star-picker" id="starPicker" role="group" aria-label="Rating">
+          <button class="star-btn" data-val="1" type="button" aria-label="1 star">★</button>
+          <button class="star-btn" data-val="2" type="button" aria-label="2 stars">★</button>
+          <button class="star-btn" data-val="3" type="button" aria-label="3 stars">★</button>
+          <button class="star-btn" data-val="4" type="button" aria-label="4 stars">★</button>
+          <button class="star-btn" data-val="5" type="button" aria-label="5 stars">★</button>
+        </div>
+        <div class="form-group">
+          <textarea id="reviewText" class="form-textarea" rows="3" placeholder="Share your experience with this provider…"></textarea>
+        </div>
+        <button class="btn btn-primary" id="submitReviewBtn" type="button">Submit Review</button>
+      </div>
+
+    </div>
+
+    <!-- Chat Panel -->
+    <aside class="chat-panel" aria-label="Booking chat">
+      <div class="chat-header">
+        <div class="chat-header-avi">R</div>
+        <div>
+          <p class="chat-header-name">Ramesh Kumar</p>
+          <p class="chat-header-status">● Online now</p>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:.5rem;">
+          <button class="btn btn-icon btn-ghost" type="button" title="Call" aria-label="Call">📞</button>
+          <button class="btn btn-icon btn-ghost" type="button" title="Info" aria-label="Booking info">ℹ️</button>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="chat-messages" id="chatMessages" role="log" aria-label="Chat messages" aria-live="polite">
+
+        <div class="chat-day-divider">Today</div>
+
+        <!-- Incoming messages -->
+        <div class="message-group message-incoming">
+          <div class="message-bubble">
+            Hello Anika! I saw your booking request. I can definitely help with the panel tripping and the bedroom switches. What time works best for you on the 20th?
+          </div>
+          <p class="message-meta">Ramesh · 6:45 PM</p>
+        </div>
+
+        <!-- Outgoing messages -->
+        <div class="message-group message-outgoing">
+          <div class="message-bubble">
+            Hi Ramesh! Is 10 AM okay? I'll be home all day so any time before noon works.
+          </div>
+          <p class="message-meta">You · 6:50 PM</p>
+        </div>
+
+        <!-- Negotiation offer -->
+        <div class="offer-bubble">
+          <p class="offer-label">💰 Price Offer from Ramesh</p>
+          <p class="offer-amount">₹320 / hour</p>
+          <p style="font-size:.8rem;color:var(--text-secondary);margin-bottom:.75rem;">Includes all tools & materials for standard repairs. Additional charges may apply for parts.</p>
+          <div class="offer-actions">
+            <button class="btn btn-success btn-sm" id="acceptOffer" type="button">✅ Accept ₹320/hr</button>
+            <button class="btn btn-ghost btn-sm" id="counterOffer" type="button">💬 Counter</button>
+          </div>
+        </div>
+
+        <div class="message-group message-incoming">
+          <div class="message-bubble">
+            10 AM works perfectly for me! See you then. Please keep some extra MCB switches just in case — I'll pay for parts separately of course. 🙂
+          </div>
+          <p class="message-meta">Ramesh · 7:05 PM</p>
+        </div>
+
+        <div class="message-group message-outgoing">
+          <div class="message-bubble">
+            Sounds good! I accepted your ₹320/hr offer. See you Tuesday morning! ✅
+          </div>
+          <p class="message-meta">You · 7:08 PM</p>
+        </div>
+
+      </div>
+
+      <!-- Chat Input -->
+      <div class="chat-input-area">
+        <div class="chat-toolbar">
+          <button class="chat-tool-btn" id="offerPriceBtn" type="button">💰 Make Offer</button>
+          <button class="chat-tool-btn" id="shareLocationBtn" type="button">📍 Location</button>
+          <button class="chat-tool-btn" id="attachFileBtn" type="button">📎 Attach</button>
+        </div>
+        <div class="chat-input-row">
+          <textarea
+            class="chat-input-box"
+            id="chatInput"
+            rows="1"
+            placeholder="Type a message…"
+            aria-label="Message input"
+          ></textarea>
+          <button class="chat-send-btn" id="sendBtn" type="button" aria-label="Send message">➤</button>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/booking.js"></script>
+<script>
+  // Navbar hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+
+  // Star picker
+  let selectedRating = 0;
+  document.querySelectorAll('.star-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      selectedRating = parseInt(this.dataset.val);
+      document.querySelectorAll('.star-btn').forEach((b, i) => {
+        b.classList.toggle('selected', i < selectedRating);
+      });
+    });
+    btn.addEventListener('mouseover', function () {
+      const val = parseInt(this.dataset.val);
+      document.querySelectorAll('.star-btn').forEach((b, i) => {
+        b.style.color = i < val ? 'var(--accent)' : '';
+      });
+    });
+    btn.addEventListener('mouseout', () => {
+      document.querySelectorAll('.star-btn').forEach((b, i) => {
+        b.style.color = i < selectedRating ? 'var(--accent)' : '';
+      });
+    });
+  });
+
+  // Submit review
+  document.getElementById('submitReviewBtn')?.addEventListener('click', async () => {
+    if (!selectedRating) { showToast('Please select a star rating.', 'error'); return; }
+    const text = document.getElementById('reviewText').value.trim();
+    showToast('Review submitted! Thank you. ⭐', 'success');
+    document.getElementById('reviewSection').style.display = 'none';
+  });
+
+  // Accept booking (provider view)
+  document.getElementById('acceptBookingBtn')?.addEventListener('click', () => {
+    document.getElementById('bookingStatus').textContent = 'Accepted';
+    document.getElementById('bookingStatus').className = 'status-badge status-accepted';
+    document.getElementById('tlAccepted').className = 'timeline-item done';
+    document.getElementById('tlAccepted').querySelector('.timeline-icon').textContent = '✓';
+    document.getElementById('providerActions').style.display = 'none';
+    showToast('Booking accepted! The customer has been notified. ✅', 'success');
+  });
+
+  document.getElementById('rejectBookingBtn')?.addEventListener('click', () => {
+    if (confirm('Are you sure you want to decline this booking?')) {
+      document.getElementById('bookingStatus').textContent = 'Declined';
+      document.getElementById('bookingStatus').className = 'status-badge status-rejected';
+      document.getElementById('providerActions').style.display = 'none';
+      showToast('Booking declined.', 'error');
+    }
+  });
+
+  // Accept price offer
+  document.getElementById('acceptOffer')?.addEventListener('click', function () {
+    document.getElementById('bookingRate').textContent = '₹320 / hour';
+    this.closest('.offer-bubble').innerHTML = '<p style="color:var(--success);font-size:.875rem;font-weight:600;">✅ You accepted ₹320/hr</p>';
+    showToast('Price accepted! ₹320/hr locked in.', 'success');
+  });
+
+  // Counter offer
+  document.getElementById('counterOffer')?.addEventListener('click', () => {
+    const counter = prompt('Enter your counter offer (₹/hr):');
+    if (counter && !isNaN(counter)) {
+      sendMessage(`I'd like to counter with ₹${counter}/hr. Does that work for you?`);
+    }
+  });
+
+  // Send message
+  document.getElementById('sendBtn').addEventListener('click', sendChatMessage);
+  document.getElementById('chatInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChatMessage(); }
+  });
+
+  // Auto-resize textarea
+  document.getElementById('chatInput').addEventListener('input', function () {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+  });
+
+  function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    const text  = input.value.trim();
+    if (!text) return;
+    sendMessage(text);
+    input.value = '';
+    input.style.height = 'auto';
+  }
+
+  function sendMessage(text) {
+    const messages = document.getElementById('chatMessages');
+    const group = document.createElement('div');
+    group.className = 'message-group message-outgoing';
+    const now = new Date();
+    group.innerHTML = `
+      <div class="message-bubble">${escapeHtml(text)}</div>
+      <p class="message-meta">You · ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}</p>
+    `;
+    messages.appendChild(group);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function showToast(msg, type = 'info') {
+    const c = document.getElementById('toastContainer');
+    const t = document.createElement('div');
+    t.className = `toast ${type}`;
+    t.textContent = msg;
+    c.appendChild(t);
+    setTimeout(() => t.remove(), 3500);
+  }
+
+  // Chat toolbar stubs
+  document.getElementById('offerPriceBtn').addEventListener('click', () => {
+    const price = prompt('Enter your price offer (₹/hr):');
+    if (price && !isNaN(price)) sendMessage(`💰 I'd like to offer ₹${price}/hr for this job.`);
+  });
+  document.getElementById('shareLocationBtn').addEventListener('click', () => {
+    sendMessage('📍 My location: Flat 3B, Kothrud, Pune — https://maps.google.com/?q=Kothrud+Pune');
+  });
+  document.getElementById('attachFileBtn').addEventListener('click', () => {
+    showToast('File attachments coming soon!', 'info');
+  });
+
+  // Scroll chat to bottom on load
+  const chatMessages = document.getElementById('chatMessages');
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+</script>
+</body>
+</html>

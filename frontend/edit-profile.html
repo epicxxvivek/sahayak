@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Profile — Sahayak</title>
+  <meta name="description" content="Update your Sahayak provider profile — skills, pricing, availability and more." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <style>
+    /* ── Edit Profile Page Styles ── */
+    .edit-page { padding-top: var(--navbar-height); min-height: 100vh; }
+
+    .edit-container {
+      max-width: 860px;
+      margin: var(--space-10) auto;
+      padding-inline: var(--space-6);
+    }
+
+    .edit-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+    .edit-header-title { font-size: var(--text-3xl); font-weight: 800; letter-spacing: -.02em; }
+    .edit-header-sub   { font-size: var(--text-sm); color: var(--text-secondary); margin-top: 2px; }
+
+    .edit-tabs {
+      display: flex;
+      gap: var(--space-1);
+      margin-bottom: var(--space-6);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2);
+    }
+    .edit-tab {
+      flex: 1;
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      text-align: center;
+      transition: all var(--transition-fast);
+      border: none;
+      background: transparent;
+    }
+    .edit-tab:hover  { color: var(--text-primary); background: var(--bg-glass); }
+    .edit-tab.active { background: var(--accent-subtle); color: var(--accent); border: 1px solid var(--border-accent); }
+
+    .edit-section {
+      display: none;
+    }
+    .edit-section.active { display: block; }
+
+    .edit-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      backdrop-filter: blur(10px);
+      margin-bottom: var(--space-6);
+    }
+
+    .edit-card-title {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    /* Avatar upload */
+    .avatar-upload-area {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      margin-bottom: var(--space-6);
+      padding: var(--space-5);
+      background: var(--bg-surface-2);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+    }
+
+    .avatar-preview {
+      width: 80px; height: 80px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; font-weight: 800; color: var(--text-inverse);
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .avatar-upload-info { flex: 1; }
+    .avatar-upload-info h4 { font-size: var(--text-sm); font-weight: 600; margin-bottom: 4px; }
+    .avatar-upload-info p  { font-size: var(--text-xs); color: var(--text-muted); }
+
+    /* Skill chips editor */
+    .skills-editor { display: flex; flex-direction: column; gap: var(--space-4); }
+    .skills-tags-area {
+      display: flex; flex-wrap: wrap; gap: var(--space-2);
+      min-height: 48px;
+      padding: var(--space-3);
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .skill-editable-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--accent-subtle); color: var(--accent);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-full);
+      padding: 4px 12px;
+      font-size: var(--text-xs); font-weight: 600;
+    }
+    .skill-remove {
+      background: none; border: none; color: var(--accent);
+      cursor: pointer; font-size: 14px; padding: 0; line-height: 1;
+      opacity: .7; transition: opacity var(--transition-fast);
+    }
+    .skill-remove:hover { opacity: 1; }
+    .skill-add-row { display: flex; gap: var(--space-3); }
+    .skill-add-input { flex: 1; }
+
+    /* Price display */
+    .price-preview {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      text-align: center;
+      margin-top: var(--space-4);
+    }
+    .price-preview-val { font-size: var(--text-3xl); font-weight: 800; color: var(--accent); }
+
+    /* Availability days grid */
+    .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: var(--space-3); }
+    .day-toggle {
+      aspect-ratio: 1;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 2px; cursor: pointer; transition: all var(--transition-fast);
+      font-size: var(--text-xs);
+    }
+    .day-toggle.active { background: var(--accent-subtle); border-color: var(--border-accent); color: var(--accent); }
+    .day-toggle span:first-child { font-weight: 700; font-size: var(--text-sm); }
+
+    /* Form grid */
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+    .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-4); }
+
+    /* Save bar */
+    .save-bar {
+      position: sticky;
+      bottom: 0;
+      background: rgba(8,13,26,.9);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: var(--space-4) var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: var(--z-above);
+    }
+    .save-bar-text { font-size: var(--text-sm); color: var(--text-secondary); }
+    .save-bar-actions { display: flex; gap: var(--space-3); }
+
+    @media (max-width:768px) {
+      .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+      .edit-tabs { flex-direction: column; }
+      .days-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="navbar-logo-icon"><img src="Gemini_Generated_Image_cjdzr0cjdzr0cjdz (1).png" alt="Sahayak Logo"></div>
+      <span class="navbar-logo-text">Saha<span>yak</span></span>
+    </a>
+    <div class="navbar-links">
+      <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+      <a href="profile.html"   class="nav-link">👤 My Profile</a>
+    </div>
+    <div class="navbar-actions">
+      <a href="dashboard.html" class="btn btn-ghost btn-sm">← Dashboard</a>
+      <a href="profile.html"   class="btn btn-secondary btn-sm">View Profile</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+  <a href="profile.html"   class="nav-link">👤 My Profile</a>
+  <div class="mobile-menu-actions">
+    <a href="dashboard.html" class="btn btn-secondary btn-full">← Dashboard</a>
+  </div>
+</div>
+
+<div class="edit-page" role="main">
+  <div class="edit-container">
+
+    <!-- Header -->
+    <div class="edit-header">
+      <div class="avatar-preview" style="width:56px;height:56px;font-size:1.5rem;">R</div>
+      <div>
+        <h1 class="edit-header-title">Edit Profile</h1>
+        <p class="edit-header-sub">Changes are saved immediately. Your profile is visible to all users.</p>
+      </div>
+    </div>
+
+    <!-- Alert -->
+    <div id="editAlert" style="display:none;margin-bottom:1rem;padding:.75rem 1rem;border-radius:var(--radius-md);font-size:.875rem;"></div>
+
+    <!-- Tabs -->
+    <div class="edit-tabs" role="tablist">
+      <button class="edit-tab active" data-tab="personal" role="tab" aria-selected="true">👤 Personal</button>
+      <button class="edit-tab" data-tab="services"  role="tab" aria-selected="false">🛠️ Services</button>
+      <button class="edit-tab" data-tab="pricing"   role="tab" aria-selected="false">💰 Pricing</button>
+      <button class="edit-tab" data-tab="schedule"  role="tab" aria-selected="false">📅 Schedule</button>
+    </div>
+
+    <!-- ── TAB: Personal Info ── -->
+    <div class="edit-section active" id="section-personal" role="tabpanel">
+
+      <div class="edit-card">
+        <p class="edit-card-title">🖼️ Profile Photo</p>
+        <div class="avatar-upload-area">
+          <div class="avatar-preview" id="avatarPreviewLg">R</div>
+          <div class="avatar-upload-info">
+            <h4>Upload a profile photo</h4>
+            <p>JPG or PNG, max 2MB. A clear photo builds trust with customers.</p>
+            <div style="display:flex;gap:.75rem;margin-top:.75rem;">
+              <button class="btn btn-secondary btn-sm" id="uploadPhotoBtn" type="button">📤 Upload Photo</button>
+              <button class="btn btn-ghost btn-sm" id="removePhotoBtn" type="button">✕ Remove</button>
+            </div>
+            <input type="file" id="photoFileInput" accept="image/*" style="display:none;" aria-label="Upload profile photo" />
+          </div>
+        </div>
+      </div>
+
+      <div class="edit-card">
+        <p class="edit-card-title">👤 Basic Information</p>
+        <form class="auth-form" id="personalForm" novalidate>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="editFirstName" class="form-label">First Name</label>
+              <input type="text" id="editFirstName" class="form-input" value="Ramesh" required />
+            </div>
+            <div class="form-group">
+              <label for="editLastName" class="form-label">Last Name</label>
+              <input type="text" id="editLastName" class="form-input" value="Kumar" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="editEmail" class="form-label">Email Address</label>
+            <input type="email" id="editEmail" class="form-input" value="ramesh.kumar@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="editPhone" class="form-label">Phone Number</label>
+            <input type="tel" id="editPhone" class="form-input" value="+91 98765 43210" />
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="editCity" class="form-label">City</label>
+              <input type="text" id="editCity" class="form-input" value="Pune" />
+            </div>
+            <div class="form-group">
+              <label for="editArea" class="form-label">Area / Locality</label>
+              <input type="text" id="editArea" class="form-input" value="Kothrud" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="editBio" class="form-label">Professional Bio</label>
+            <textarea id="editBio" class="form-textarea" rows="4" placeholder="Describe your experience, certifications, and what sets you apart…">I am a certified master electrician with over 8 years of experience in residential and commercial electrical work. I specialize in complete home wiring, electrical panel upgrades, inverter and UPS installation, CCTV systems, and emergency electrical repairs.</textarea>
+            <p class="form-hint"><span id="bioCharCount">0</span> / 500 characters</p>
+          </div>
+          <button type="submit" class="btn btn-primary" id="savePersonalBtn">
+            <span>Save Personal Info</span>
+            <span class="spinner" id="personalSpinner" style="display:none;"></span>
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- ── TAB: Services & Skills ── -->
+    <div class="edit-section" id="section-services" role="tabpanel">
+      <div class="edit-card">
+        <p class="edit-card-title">🛠️ Service Category</p>
+        <div class="form-group">
+          <label for="editCategory" class="form-label">Primary Category</label>
+          <select id="editCategory" class="form-select">
+            <option value="electrician" selected>⚡ Electrician</option>
+            <option value="plumber">🔧 Plumber</option>
+            <option value="maid">🧹 Maid / House Cleaner</option>
+            <option value="carpenter">🪚 Carpenter</option>
+            <option value="painter">🎨 Painter</option>
+            <option value="ac-repair">❄️ AC Repair</option>
+            <option value="driver">🚗 Driver</option>
+            <option value="cook">👨‍🍳 Cook</option>
+            <option value="gardener">🌿 Gardener</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="edit-card">
+        <p class="edit-card-title">🏷️ Skills & Specializations</p>
+        <div class="skills-editor">
+          <p style="font-size:.875rem;color:var(--text-secondary);">Add the specific skills you offer. These appear on your profile and help customers find you.</p>
+          <div class="skills-tags-area" id="skillsTagsArea" aria-label="Your skills">
+            <!-- Tags injected by JS -->
+          </div>
+          <div class="skill-add-row">
+            <input type="text" id="skillInput" class="form-input skill-add-input" placeholder="Add a skill (e.g. MCB Fitting)…" maxlength="40" />
+            <button type="button" class="btn btn-primary" id="addSkillBtn">+ Add</button>
+          </div>
+          <p class="form-hint">Press Enter or click Add. Max 15 skills.</p>
+        </div>
+      </div>
+
+      <div class="edit-card">
+        <p class="edit-card-title">📝 Service Description</p>
+        <div class="form-group">
+          <label for="serviceDesc" class="form-label">What services do you offer?</label>
+          <textarea id="serviceDesc" class="form-textarea" rows="5" placeholder="List the specific services you offer, areas you cover, your experience level, and anything else customers should know…">I provide complete electrical services for homes and offices in Pune.
+Services: Complete home wiring, Panel upgrades, MCB/RCCB replacement, Inverter installation, Fan/light fittings, CCTV setup, Emergency repairs, Geyser installation.
+Coverage area: Kothrud, Warje, Bavdhan, Aundh, Wakad, Pimpri, Chinchwad.</textarea>
+        </div>
+        <button type="button" class="btn btn-primary" id="saveServicesBtn">Save Services</button>
+      </div>
+    </div>
+
+    <!-- ── TAB: Pricing ── -->
+    <div class="edit-section" id="section-pricing" role="tabpanel">
+      <div class="edit-card">
+        <p class="edit-card-title">💰 Pricing Settings</p>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="hourlyRate" class="form-label">Hourly Rate (₹)</label>
+            <div class="input-wrapper">
+              <span class="input-icon">₹</span>
+              <input type="number" id="hourlyRate" class="form-input" value="300" min="50" max="5000" step="10" />
+            </div>
+            <p class="form-hint">This is your base rate. You can negotiate on a per-booking basis.</p>
+          </div>
+          <div class="form-group">
+            <label for="visitCharge" class="form-label">Visit / Call-out Charge (₹)</label>
+            <div class="input-wrapper">
+              <span class="input-icon">₹</span>
+              <input type="number" id="visitCharge" class="form-input" value="0" min="0" max="500" placeholder="0 = Free" />
+            </div>
+            <p class="form-hint">Charge for coming to the customer's location.</p>
+          </div>
+        </div>
+        <div class="price-preview">
+          <p style="font-size:.75rem;color:var(--text-muted);margin-bottom:.25rem;">CUSTOMERS WILL SEE</p>
+          <p class="price-preview-val" id="pricePreview">₹300<span style="font-size:1rem;font-weight:400;color:var(--text-muted);">/hour</span></p>
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.25rem;" id="visitPreview"></p>
+        </div>
+        <div class="form-group" style="margin-top:1.25rem;">
+          <label class="form-label">Negotiable?</label>
+          <div style="display:flex;align-items:center;gap:.75rem;margin-top:.25rem;">
+            <label style="display:flex;align-items:center;gap:.5rem;font-size:.875rem;cursor:pointer;">
+              <input type="checkbox" id="negotiable" checked style="accent-color:var(--accent);" />
+              Yes, I'm open to negotiating price with customers
+            </label>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="savePricingBtn">Save Pricing</button>
+      </div>
+    </div>
+
+    <!-- ── TAB: Availability / Schedule ── -->
+    <div class="edit-section" id="section-schedule" role="tabpanel">
+      <div class="edit-card">
+        <p class="edit-card-title">📅 Weekly Availability</p>
+        <p style="font-size:.875rem;color:var(--text-secondary);margin-bottom:1.5rem;">Click on the days you are available for bookings.</p>
+        <div class="days-grid" id="daysGrid" role="group" aria-label="Available days">
+          <button class="day-toggle active" data-day="mon" type="button" aria-pressed="true"><span>M</span><span>Mon</span></button>
+          <button class="day-toggle active" data-day="tue" type="button" aria-pressed="true"><span>T</span><span>Tue</span></button>
+          <button class="day-toggle active" data-day="wed" type="button" aria-pressed="true"><span>W</span><span>Wed</span></button>
+          <button class="day-toggle"        data-day="thu" type="button" aria-pressed="false"><span>T</span><span>Thu</span></button>
+          <button class="day-toggle active" data-day="fri" type="button" aria-pressed="true"><span>F</span><span>Fri</span></button>
+          <button class="day-toggle active" data-day="sat" type="button" aria-pressed="true"><span>S</span><span>Sat</span></button>
+          <button class="day-toggle"        data-day="sun" type="button" aria-pressed="false"><span>S</span><span>Sun</span></button>
+        </div>
+      </div>
+
+      <div class="edit-card">
+        <p class="edit-card-title">🕐 Working Hours</p>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="workStart" class="form-label">Start Time</label>
+            <input type="time" id="workStart" class="form-input" value="09:00" />
+          </div>
+          <div class="form-group">
+            <label for="workEnd" class="form-label">End Time</label>
+            <input type="time" id="workEnd" class="form-input" value="18:00" />
+          </div>
+        </div>
+      </div>
+
+      <div class="edit-card">
+        <p class="edit-card-title">⚡ Availability Status</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <p style="font-size:.875rem;font-weight:600;">Currently Available</p>
+            <p style="font-size:.8125rem;color:var(--text-secondary);margin-top:2px;">Toggle off to pause new booking requests.</p>
+          </div>
+          <label class="toggle" style="position:relative;width:48px;height:26px;">
+            <input type="checkbox" id="availableToggle" checked style="position:absolute;opacity:0;width:0;height:0;" />
+            <span class="toggle-track" style="position:absolute;inset:0;border-radius:9999px;background:var(--bg-surface-3);border:1px solid var(--border);transition:all .25s;"></span>
+            <span class="toggle-thumb" style="position:absolute;top:4px;left:4px;width:16px;height:16px;background:white;border-radius:50%;transition:transform .25s;pointer-events:none;"></span>
+          </label>
+        </div>
+        <button type="button" class="btn btn-primary" id="saveScheduleBtn" style="margin-top:1.5rem;">Save Schedule</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+  // Navbar
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+
+  // Tab switching
+  document.querySelectorAll('.edit-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.edit-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      document.querySelectorAll('.edit-section').forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected','true');
+      document.getElementById('section-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Bio character counter
+  const bioEl = document.getElementById('editBio');
+  const bioCount = document.getElementById('bioCharCount');
+  function updateBioCount() { bioCount.textContent = bioEl.value.length; }
+  bioEl.addEventListener('input', updateBioCount);
+  updateBioCount();
+
+  // Skills management
+  const defaultSkills = ['⚡ Home Wiring','🔌 Panel Upgrades','🔋 Inverter / UPS','📹 CCTV Install','💡 Fan & Light Fitting','🔧 Emergency Repairs'];
+  let skills = [...defaultSkills];
+
+  function renderSkills() {
+    const area = document.getElementById('skillsTagsArea');
+    area.innerHTML = skills.map((s, i) => `
+      <span class="skill-editable-tag">
+        ${escHtml(s)}
+        <button class="skill-remove" data-index="${i}" type="button" aria-label="Remove ${s}">✕</button>
+      </span>
+    `).join('');
+    area.querySelectorAll('.skill-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        skills.splice(parseInt(btn.dataset.index), 1);
+        renderSkills();
+      });
+    });
+  }
+  renderSkills();
+
+  document.getElementById('addSkillBtn').addEventListener('click', addSkill);
+  document.getElementById('skillInput').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); addSkill(); } });
+  function addSkill() {
+    const input = document.getElementById('skillInput');
+    const val = input.value.trim();
+    if (!val) return;
+    if (skills.length >= 15) { showToast('Max 15 skills allowed.', 'error'); return; }
+    if (skills.includes(val)) { showToast('Skill already added.', 'error'); return; }
+    skills.push(val);
+    renderSkills();
+    input.value = '';
+  }
+
+  // Price preview
+  document.getElementById('hourlyRate').addEventListener('input', updatePricePreview);
+  document.getElementById('visitCharge').addEventListener('input', updatePricePreview);
+  function updatePricePreview() {
+    const rate  = document.getElementById('hourlyRate').value;
+    const visit = document.getElementById('visitCharge').value;
+    document.getElementById('pricePreview').innerHTML = `₹${rate || 0}<span style="font-size:1rem;font-weight:400;color:var(--text-muted);">/hour</span>`;
+    document.getElementById('visitPreview').textContent = visit > 0 ? `+ ₹${visit} visit charge` : 'No visit charge';
+  }
+
+  // Days toggle
+  document.querySelectorAll('.day-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isActive = btn.classList.toggle('active');
+      btn.setAttribute('aria-pressed', isActive);
+    });
+  });
+
+  // Availability toggle - sync thumb position
+  document.getElementById('availableToggle').addEventListener('change', function() {
+    const thumb = this.parentElement.querySelector('.toggle-thumb');
+    const track = this.parentElement.querySelector('.toggle-track');
+    if (this.checked) {
+      thumb.style.transform = 'translateX(22px)';
+      track.style.background = 'var(--accent)';
+      track.style.borderColor = 'var(--accent)';
+    } else {
+      thumb.style.transform = 'translateX(0)';
+      track.style.background = 'var(--bg-surface-3)';
+      track.style.borderColor = 'var(--border)';
+    }
+  });
+
+  // Photo upload
+  document.getElementById('uploadPhotoBtn').addEventListener('click', () => document.getElementById('photoFileInput').click());
+  document.getElementById('photoFileInput').addEventListener('change', function () {
+    if (!this.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" alt="Profile photo" />`;
+      document.getElementById('avatarPreviewLg').innerHTML = img;
+      document.getElementById('avatarPreviewLg').style.background = 'none';
+    };
+    reader.readAsDataURL(this.files[0]);
+  });
+  document.getElementById('removePhotoBtn').addEventListener('click', () => {
+    document.getElementById('avatarPreviewLg').innerHTML = 'R';
+    document.getElementById('avatarPreviewLg').style.background = 'linear-gradient(135deg,var(--accent),var(--accent-dark))';
+  });
+
+  // Save buttons (all stub for now — will call API later)
+  async function saveWithSpinner(btnId, spinnerId, label) {
+    const btn  = document.getElementById(btnId);
+    const spin = document.getElementById(spinnerId);
+    if (spin) { btn.disabled = true; spin.style.display = 'inline-block'; }
+    await new Promise(r => setTimeout(r, 900));
+    if (spin) { btn.disabled = false; spin.style.display = 'none'; }
+    showToast(`${label} saved successfully! ✅`, 'success');
+  }
+
+  document.getElementById('personalForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await saveWithSpinner('savePersonalBtn', 'personalSpinner', 'Personal info');
+  });
+  document.getElementById('saveServicesBtn').addEventListener('click', () => saveWithSpinner('saveServicesBtn', null, 'Services'));
+  document.getElementById('savePricingBtn').addEventListener('click', () => saveWithSpinner('savePricingBtn', null, 'Pricing'));
+  document.getElementById('saveScheduleBtn').addEventListener('click', () => saveWithSpinner('saveScheduleBtn', null, 'Schedule'));
+
+  function showToast(msg, type = 'info') {
+    const c = document.getElementById('toastContainer');
+    const t = document.createElement('div');
+    t.className = `toast ${type}`;
+    t.textContent = msg;
+    c.appendChild(t);
+    setTimeout(() => t.remove(), 3500);
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+</script>
+</body>
+</html>

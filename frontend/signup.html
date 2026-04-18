@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up — Sahayak</title>
+  <meta name="description" content="Create your free Sahayak account. Find local services or list your skills as a provider." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+
+<main class="auth-page" role="main">
+
+  <!-- ── Left Branding Panel ── -->
+  <div class="auth-panel-left" aria-hidden="true">
+    <div class="auth-left-content">
+      <a href="index.html" class="auth-left-logo">
+        <div class="auth-logo-icon"><img src="Gemini_Generated_Image_cjdzr0cjdzr0cjdz (1).png" alt="Sahayak Logo"></div>
+        <span class="auth-logo-text">Saha<span>yak</span></span>
+      </a>
+
+      <h1 class="auth-tagline">
+        Join<br /><span class="gradient-text">Sahayak</span><br />Today
+      </h1>
+      <p class="auth-tagline-sub">
+        Whether you need a service or you provide one — Sahayak is the platform built for you. Free to join, easy to use.
+      </p>
+
+      <div class="auth-features">
+        <div class="auth-feature">
+          <div class="auth-feature-icon">🆓</div>
+          <span>100% free to sign up, no hidden fees</span>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">🔒</div>
+          <span>Your data is safe and private</span>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">⚡</div>
+          <span>Start finding or offering services in minutes</span>
+        </div>
+        <div class="auth-feature">
+          <div class="auth-feature-icon">🌍</div>
+          <span>Available across 50+ Indian cities</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-float-card">
+      <div class="auth-float-card-inner">
+        <div class="auth-float-avi" style="background:linear-gradient(135deg,var(--blue),#6366F1)">P</div>
+        <div>
+          <p class="auth-float-name">Priya Sharma</p>
+          <p class="auth-float-sub">🧹 Maid · Mumbai</p>
+        </div>
+      </div>
+      <div class="auth-float-badge">⭐ 4.8 · 98 reviews</div>
+    </div>
+  </div>
+
+  <!-- ── Right Form Panel ── -->
+  <div class="auth-panel-right">
+    <div class="auth-form-wrapper">
+
+      <a href="index.html"
+         style="font-size:.875rem;margin-bottom:1.5rem;display:inline-flex;align-items:center;gap:.5rem;color:var(--text-secondary);transition:color .15s;"
+         onmouseover="this.style.color='var(--text-primary)'"
+         onmouseout="this.style.color='var(--text-secondary)'">
+        ← Back to Home
+      </a>
+
+      <!-- Step Indicator -->
+      <div style="display:flex;gap:.5rem;margin-bottom:1.5rem;" aria-label="Sign up progress">
+        <div class="step-dot active" id="dot-1" style="flex:1;height:3px;border-radius:2px;background:var(--accent);transition:background .3s;"></div>
+        <div class="step-dot" id="dot-2" style="flex:1;height:3px;border-radius:2px;background:var(--border);transition:background .3s;"></div>
+        <div class="step-dot" id="dot-3" style="flex:1;height:3px;border-radius:2px;background:var(--border);transition:background .3s;"></div>
+      </div>
+
+      <div id="authAlert" style="display:none;margin-bottom:1rem;padding:.75rem 1rem;border-radius:var(--radius-md);font-size:.875rem;"></div>
+
+      <!-- ── STEP 1: Choose Role ── -->
+      <div id="step1">
+        <div class="auth-form-header">
+          <h2 class="auth-form-title">Create Account</h2>
+          <p class="auth-form-subtitle">How would you like to use Sahayak?</p>
+        </div>
+
+        <div class="role-selector" role="group" aria-label="Choose your account type">
+          <button type="button" class="role-card" id="roleCustomer" onclick="selectRole('customer')">
+            <div class="role-card-icon">🙋</div>
+            <p class="role-card-title">I'm a Customer</p>
+            <p class="role-card-desc">I want to find & book service providers</p>
+          </button>
+          <button type="button" class="role-card" id="roleProvider" onclick="selectRole('provider')">
+            <div class="role-card-icon">🔨</div>
+            <p class="role-card-title">I'm a Provider</p>
+            <p class="role-card-desc">I want to offer my skills & earn money</p>
+          </button>
+        </div>
+
+        <!-- Social Login -->
+        <div class="social-login" style="margin-top:1.5rem;">
+          <button class="social-login-btn" type="button" id="googleSignupBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Continue with Google
+          </button>
+        </div>
+
+        <div class="divider-text">or sign up with email</div>
+
+        <button class="btn btn-primary btn-full btn-lg" id="step1Next" onclick="goToStep(2)" disabled>
+          Continue →
+        </button>
+      </div>
+
+      <!-- ── STEP 2: Basic Details ── -->
+      <div id="step2" style="display:none;">
+        <div class="auth-form-header">
+          <h2 class="auth-form-title">Your Details</h2>
+          <p class="auth-form-subtitle">Tell us a bit about yourself.</p>
+        </div>
+
+        <form class="auth-form" id="signupForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="signupFirstName" class="form-label">First Name</label>
+              <input type="text" id="signupFirstName" class="form-input" placeholder="Raj" required />
+              <span class="form-error" id="firstNameError" style="display:none;"></span>
+            </div>
+            <div class="form-group">
+              <label for="signupLastName" class="form-label">Last Name</label>
+              <input type="text" id="signupLastName" class="form-input" placeholder="Sharma" required />
+              <span class="form-error" id="lastNameError" style="display:none;"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="signupEmail" class="form-label">Email Address</label>
+            <div class="input-wrapper">
+              <span class="input-icon">✉️</span>
+              <input type="email" id="signupEmail" class="form-input" placeholder="raj@example.com" required autocomplete="email" />
+            </div>
+            <span class="form-error" id="signupEmailError" style="display:none;"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="signupPhone" class="form-label">Phone Number</label>
+            <div class="input-wrapper">
+              <span class="input-icon">📱</span>
+              <input type="tel" id="signupPhone" class="form-input" placeholder="+91 98765 43210" required autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="signupCity" class="form-label">Your City</label>
+            <div class="input-wrapper">
+              <span class="input-icon">📍</span>
+              <input type="text" id="signupCity" class="form-input" placeholder="Mumbai, Delhi, Pune…" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="signupPassword" class="form-label">Password</label>
+            <div class="input-wrapper" style="position:relative;">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="signupPassword" class="form-input" placeholder="At least 8 characters" required autocomplete="new-password" />
+              <button type="button" class="password-toggle" id="toggleSignupPwd" aria-label="Toggle password">👁️</button>
+            </div>
+            <div class="password-strength" id="passwordStrength" style="display:none;">
+              <div class="strength-bar"><div class="strength-fill" id="strengthFill" style="width:0%;"></div></div>
+              <p class="strength-text" id="strengthText"></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="signupConfirmPwd" class="form-label">Confirm Password</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="signupConfirmPwd" class="form-input" placeholder="Repeat your password" required autocomplete="new-password" />
+            </div>
+            <span class="form-error" id="confirmPwdError" style="display:none;"></span>
+          </div>
+
+          <label class="terms-check">
+            <input type="checkbox" id="termsAccepted" required />
+            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+          </label>
+
+          <div style="display:flex;gap:.75rem;">
+            <button type="button" class="btn btn-secondary" onclick="goToStep(1)" style="flex-shrink:0;">← Back</button>
+            <button type="button" class="btn btn-primary btn-full btn-lg" id="step2Next" onclick="validateAndNext()">
+              <span id="step2BtnText">Continue →</span>
+              <span id="step2Spinner" class="spinner" style="display:none;"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ── STEP 3: Provider Extra (shown only for providers) ── -->
+      <div id="step3" style="display:none;">
+        <div class="auth-form-header">
+          <h2 class="auth-form-title" id="step3Title">Almost Done! 🎉</h2>
+          <p class="auth-form-subtitle" id="step3Subtitle">Add your professional details to start receiving bookings.</p>
+        </div>
+
+        <form class="auth-form" id="providerForm" novalidate>
+          <!-- shown only for providers -->
+          <div id="providerFields">
+            <div class="form-group">
+              <label for="providerCategory" class="form-label">Your Service Category</label>
+              <select id="providerCategory" class="form-select">
+                <option value="">Select your main category…</option>
+                <option value="electrician">⚡ Electrician</option>
+                <option value="plumber">🔧 Plumber</option>
+                <option value="maid">🧹 Maid / House Cleaner</option>
+                <option value="carpenter">🪚 Carpenter</option>
+                <option value="painter">🎨 Painter</option>
+                <option value="ac-repair">❄️ AC Repair</option>
+                <option value="driver">🚗 Driver</option>
+                <option value="cook">👨‍🍳 Cook</option>
+                <option value="gardener">🌿 Gardener</option>
+                <option value="other">✨ Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="providerRate" class="form-label">Hourly Rate (₹)</label>
+              <div class="input-wrapper">
+                <span class="input-icon">₹</span>
+                <input type="number" id="providerRate" class="form-input" placeholder="e.g. 300" min="50" max="5000" />
+              </div>
+              <p class="form-hint">You can update this anytime from your profile.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="providerBio" class="form-label">Short Bio</label>
+              <textarea id="providerBio" class="form-textarea" rows="3" placeholder="Describe your experience, skills, and what makes you stand out…"></textarea>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:.75rem;">
+            <button type="button" class="btn btn-secondary" onclick="goToStep(2)" style="flex-shrink:0;">← Back</button>
+            <button type="submit" class="btn btn-primary btn-full btn-lg" id="finalSignupBtn">
+              <span id="finalBtnText">Create My Account 🚀</span>
+              <span id="finalSpinner" class="spinner" style="display:none;"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="auth-switch" style="margin-top:1.5rem;">
+        Already have an account? <a href="login.html" id="goToLogin">Log in →</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/auth.js"></script>
+<script>
+  let selectedRole = null;
+
+  // Auto-select role from URL param
+  const params = new URLSearchParams(window.location.search);
+  const urlRole = params.get('role');
+  if (urlRole === 'provider' || urlRole === 'customer') {
+    selectRole(urlRole);
+  }
+
+  function selectRole(role) {
+    selectedRole = role;
+    document.getElementById('roleCustomer').classList.toggle('selected', role === 'customer');
+    document.getElementById('roleProvider').classList.toggle('selected', role === 'provider');
+    document.getElementById('step1Next').disabled = false;
+  }
+
+  function goToStep(step) {
+    document.getElementById('step1').style.display = step === 1 ? 'block' : 'none';
+    document.getElementById('step2').style.display = step === 2 ? 'block' : 'none';
+    document.getElementById('step3').style.display = step === 3 ? 'block' : 'none';
+
+    // Update step dots
+    ['dot-1','dot-2','dot-3'].forEach((id, i) => {
+      document.getElementById(id).style.background = i < step ? 'var(--accent)' : 'var(--border)';
+    });
+
+    // Customer skips step 3
+    if (step === 3 && selectedRole === 'customer') {
+      document.getElementById('providerFields').style.display = 'none';
+      document.getElementById('step3Title').textContent = 'Almost Done! 🎉';
+      document.getElementById('step3Subtitle').textContent = 'Your account is ready. Click below to get started!';
+    }
+  }
+
+  // Password strength checker
+  document.getElementById('signupPassword').addEventListener('input', function () {
+    const val = this.value;
+    const strengthDiv = document.getElementById('passwordStrength');
+    const fill   = document.getElementById('strengthFill');
+    const text   = document.getElementById('strengthText');
+    if (!val) { strengthDiv.style.display = 'none'; return; }
+    strengthDiv.style.display = 'block';
+    const score = [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/, /.{8,}/]
+      .filter(rx => rx.test(val)).length;
+    const levels = [
+      { pct:'20%', cls:'weak',   lbl:'Weak' },
+      { pct:'40%', cls:'weak',   lbl:'Weak' },
+      { pct:'60%', cls:'medium', lbl:'Fair' },
+      { pct:'80%', cls:'medium', lbl:'Good' },
+      { pct:'100%',cls:'strong', lbl:'Strong ✓' },
+    ];
+    const l = levels[score - 1] || levels[0];
+    fill.style.width = l.pct; fill.className = 'strength-fill ' + l.cls;
+    text.textContent = l.lbl;
+  });
+
+  // Password toggle
+  document.getElementById('toggleSignupPwd').addEventListener('click', function () {
+    const input = document.getElementById('signupPassword');
+    const isText = input.type === 'text';
+    input.type = isText ? 'password' : 'text';
+    this.textContent = isText ? '👁️' : '🙈';
+  });
+
+  // Validate step 2 and move to step 3
+  function validateAndNext() {
+    const first = document.getElementById('signupFirstName').value.trim();
+    const last  = document.getElementById('signupLastName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const pwd   = document.getElementById('signupPassword').value;
+    const cpwd  = document.getElementById('signupConfirmPwd').value;
+    const terms = document.getElementById('termsAccepted').checked;
+
+    let valid = true;
+
+    if (!first) { showFieldError('firstNameError', 'First name is required.'); valid = false; } else hideFieldError('firstNameError');
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFieldError('signupEmailError', 'Enter a valid email.'); valid = false; } else hideFieldError('signupEmailError');
+    if (pwd.length < 8) { showFieldError('confirmPwdError', 'Password must be at least 8 characters.'); valid = false; }
+    else if (pwd !== cpwd) { showFieldError('confirmPwdError', 'Passwords do not match.'); valid = false; }
+    else hideFieldError('confirmPwdError');
+    if (!terms) { showAlert('Please accept the Terms of Service to continue.', 'error'); valid = false; }
+
+    if (valid) goToStep(3);
+  }
+
+  // Final signup submission
+  document.getElementById('providerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn  = document.getElementById('finalSignupBtn');
+    const text = document.getElementById('finalBtnText');
+    const spin = document.getElementById('finalSpinner');
+    btn.disabled = true; text.style.display = 'none'; spin.style.display = 'inline-block';
+
+    const payload = {
+      name:     `${document.getElementById('signupFirstName').value} ${document.getElementById('signupLastName').value}`.trim(),
+      email:    document.getElementById('signupEmail').value.trim(),
+      phone:    document.getElementById('signupPhone').value.trim(),
+      city:     document.getElementById('signupCity').value.trim(),
+      password: document.getElementById('signupPassword').value,
+      role:     selectedRole,
+      category: document.getElementById('providerCategory')?.value || null,
+      rate:     document.getElementById('providerRate')?.value || null,
+      bio:      document.getElementById('providerBio')?.value || null,
+    };
+
+    try {
+      // TODO: Replace with real API call
+      // const res = await fetch('/api/auth/signup', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+      await new Promise(r => setTimeout(r, 1200)); // simulate network
+      showAlert('Account created! Redirecting to login…', 'success');
+      setTimeout(() => window.location.href = 'login.html', 1500);
+    } catch (err) {
+      showAlert('Signup failed. Please try again.', 'error');
+      btn.disabled = false; text.style.display = ''; spin.style.display = 'none';
+    }
+  });
+
+  function showFieldError(id, msg) { const el = document.getElementById(id); el.textContent = msg; el.style.display = 'block'; }
+  function hideFieldError(id) { document.getElementById(id).style.display = 'none'; }
+  function showAlert(msg, type) {
+    const el = document.getElementById('authAlert');
+    el.textContent = msg;
+    el.style.display = 'block';
+    el.style.background  = type === 'success' ? 'var(--success-subtle)' : 'var(--error-subtle)';
+    el.style.color       = type === 'success' ? 'var(--success)' : 'var(--error)';
+    el.style.border      = `1px solid ${type === 'success' ? 'rgba(16,185,129,.25)' : 'rgba(239,68,68,.25)'}`;
+  }
+
+  document.getElementById('googleSignupBtn').addEventListener('click', () => {
+    alert('Google OAuth coming soon! Use email/password for now.');
+  });
+</script>
+</body>
+</html>

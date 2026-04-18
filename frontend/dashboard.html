@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Sahayak</title>
+  <meta name="description" content="Manage your bookings, messages, and profile on Sahayak." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="navbar-logo-icon"><img src="Gemini_Generated_Image_cjdzr0cjdzr0cjdz (1).png" alt="Sahayak Logo"></div>
+      <span class="navbar-logo-text">Saha<span>yak</span></span>
+    </a>
+    <div class="navbar-links">
+      <a href="index.html"   class="nav-link">🏠 Home</a>
+      <a href="search.html"  class="nav-link">🔍 Find Services</a>
+      <a href="dashboard.html" class="nav-link active">📊 Dashboard</a>
+    </div>
+    <div class="navbar-actions">
+      <!-- User menu injected by JS -->
+      <div class="user-menu-wrapper" id="userMenuWrapper">
+        <button class="user-menu-trigger" id="userMenuTrigger" aria-label="User menu" aria-expanded="false">
+          <div class="avatar avatar-sm">R</div>
+          <span class="user-name" id="navUserName">Ramesh K.</span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="user-dropdown" id="userDropdown" role="menu">
+          <a href="dashboard.html"    class="dropdown-item" role="menuitem">📊 Dashboard</a>
+          <a href="edit-profile.html" class="dropdown-item" role="menuitem">✏️ Edit Profile</a>
+          <div class="dropdown-separator"></div>
+          <div class="dropdown-item danger" id="logoutBtn" role="menuitem" tabindex="0">🚪 Logout</div>
+        </div>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="dashboard-page" role="main">
+
+  <!-- Sidebar Nav -->
+  <aside class="dash-sidebar" aria-label="Dashboard navigation">
+    <div class="dash-user-panel">
+      <div class="dash-user-avi" id="dashUserAvi">R</div>
+      <p class="dash-user-name" id="dashUserName">Ramesh Kumar</p>
+      <span class="dash-user-role" id="dashUserRole">⚡ Provider</span>
+    </div>
+
+    <div class="dash-nav-section">
+      <p class="dash-nav-label">Overview</p>
+      <a href="#overview"  class="dash-nav-item active" data-section="overview">
+        <span class="dash-nav-icon">📊</span> Overview
+      </a>
+    </div>
+
+    <div class="dash-nav-section">
+      <p class="dash-nav-label">Bookings</p>
+      <a href="#bookings" class="dash-nav-item" data-section="bookings">
+        <span class="dash-nav-icon">📅</span> My Bookings
+        <span class="dash-nav-badge" id="pendingBadge">3</span>
+      </a>
+    </div>
+
+    <div class="dash-nav-section">
+      <p class="dash-nav-label">Communication</p>
+      <a href="#messages" class="dash-nav-item" data-section="messages">
+        <span class="dash-nav-icon">💬</span> Messages
+        <span class="dash-nav-badge" id="msgBadge">2</span>
+      </a>
+    </div>
+
+    <div class="dash-nav-section">
+      <p class="dash-nav-label">Profile</p>
+      <a href="edit-profile.html" class="dash-nav-item">
+        <span class="dash-nav-icon">✏️</span> Edit Profile
+      </a>
+      <a href="profile.html" class="dash-nav-item">
+        <span class="dash-nav-icon">👤</span> View Public Profile
+      </a>
+    </div>
+
+    <div class="dash-nav-section" style="margin-top:auto;padding-top:1rem;border-top:1px solid var(--border);">
+      <div class="dash-nav-item danger" id="sidebarLogout" style="color:var(--error);cursor:pointer;">
+        <span class="dash-nav-icon">🚪</span> Logout
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dash-main">
+
+    <!-- Overview Section -->
+    <div id="section-overview">
+      <div class="dash-page-header">
+        <div>
+          <h1 class="dash-page-title">Welcome back, <span id="greetName">Ramesh</span> 👋</h1>
+          <p class="dash-page-subtitle" id="greetDate">Thursday, 17 April 2026</p>
+        </div>
+        <a href="search.html" class="btn btn-primary">🔍 Find Services</a>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="stats-row" role="region" aria-label="Statistics">
+        <div class="stat-card accent">
+          <div class="stat-card-icon">📅</div>
+          <p class="stat-card-val" id="statTotal">12</p>
+          <p class="stat-card-label">Total Bookings</p>
+          <p class="stat-card-trend up">↑ +3 this month</p>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-card-icon">✅</div>
+          <p class="stat-card-val" id="statCompleted">8</p>
+          <p class="stat-card-label">Completed</p>
+          <p class="stat-card-trend up">↑ 67% completion rate</p>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-card-icon">⭐</div>
+          <p class="stat-card-val" id="statRating">4.9</p>
+          <p class="stat-card-label">Avg. Rating</p>
+          <p class="stat-card-trend up">↑ 142 reviews</p>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-card-icon">💬</div>
+          <p class="stat-card-val" id="statMessages">5</p>
+          <p class="stat-card-label">Active Chats</p>
+          <p class="stat-card-trend">2 unread</p>
+        </div>
+      </div>
+
+      <!-- Two-column row -->
+      <div class="dash-row">
+        <!-- Recent Bookings -->
+        <div class="dash-panel">
+          <div class="dash-panel-header">
+            <p class="dash-panel-title">Recent Bookings</p>
+            <div class="dash-tabs">
+              <button class="dash-tab active" data-tab="all" type="button">All</button>
+              <button class="dash-tab" data-tab="pending" type="button">Pending</button>
+              <button class="dash-tab" data-tab="active" type="button">Active</button>
+            </div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="bookings-table" aria-label="Recent bookings">
+              <thead>
+                <tr>
+                  <th>Customer / Job</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="bookingsTableBody">
+                <tr>
+                  <td>
+                    <div class="booking-provider">
+                      <div class="booking-avi">A</div>
+                      <div>
+                        <p class="booking-name">Anika Mehta</p>
+                        <p class="booking-service">Home Wiring Repair</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.875rem;color:var(--text-secondary);">Apr 20, 2026</td>
+                  <td><span class="status-badge status-pending">Pending</span></td>
+                  <td>
+                    <div class="booking-actions">
+                      <a href="booking.html?id=1" class="btn btn-sm btn-secondary">View</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="booking-provider">
+                      <div class="booking-avi" style="background:linear-gradient(135deg,var(--blue),#6366F1);">S</div>
+                      <div>
+                        <p class="booking-name">Saurabh Joshi</p>
+                        <p class="booking-service">Inverter Installation</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.875rem;color:var(--text-secondary);">Apr 18, 2026</td>
+                  <td><span class="status-badge status-accepted">Accepted</span></td>
+                  <td>
+                    <div class="booking-actions">
+                      <a href="booking.html?id=2" class="btn btn-sm btn-secondary">View</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="booking-provider">
+                      <div class="booking-avi" style="background:linear-gradient(135deg,#10B981,#059669);">N</div>
+                      <div>
+                        <p class="booking-name">Neha Patil</p>
+                        <p class="booking-service">CCTV System Setup</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.875rem;color:var(--text-secondary);">Apr 12, 2026</td>
+                  <td><span class="status-badge status-completed">Completed</span></td>
+                  <td>
+                    <div class="booking-actions">
+                      <a href="booking.html?id=3" class="btn btn-sm btn-secondary">View</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="booking-provider">
+                      <div class="booking-avi" style="background:linear-gradient(135deg,#8B5CF6,#6366F1);">V</div>
+                      <div>
+                        <p class="booking-name">Vijay More</p>
+                        <p class="booking-service">Panel Upgrade</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.875rem;color:var(--text-secondary);">Apr 8, 2026</td>
+                  <td><span class="status-badge status-rejected">Rejected</span></td>
+                  <td>
+                    <div class="booking-actions">
+                      <a href="booking.html?id=4" class="btn btn-sm btn-secondary">View</a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recent Messages -->
+        <div class="dash-panel">
+          <div class="dash-panel-header">
+            <p class="dash-panel-title">Recent Messages</p>
+            <a href="#messages" class="btn btn-ghost btn-sm" data-section="messages">View All</a>
+          </div>
+          <div class="message-preview-list" id="messagePreviewList">
+            <a href="booking.html?id=1" class="message-preview-item unread">
+              <div class="msg-avi" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark));">A
+                <div class="msg-unread-dot"></div>
+              </div>
+              <div class="msg-body">
+                <p class="msg-name">Anika Mehta</p>
+                <p class="msg-preview">Can you do it by Tuesday morning? I'm flexible on price.</p>
+              </div>
+              <div class="msg-meta">
+                <p class="msg-time">2m ago</p>
+                <span class="badge badge-accent" style="font-size:.625rem;">New</span>
+              </div>
+            </a>
+            <a href="booking.html?id=2" class="message-preview-item unread">
+              <div class="msg-avi" style="background:linear-gradient(135deg,var(--blue),#6366F1);">S
+                <div class="msg-unread-dot"></div>
+              </div>
+              <div class="msg-body">
+                <p class="msg-name">Saurabh Joshi</p>
+                <p class="msg-preview">Okay, ₹320/hr works for me. See you tomorrow at 10am.</p>
+              </div>
+              <div class="msg-meta">
+                <p class="msg-time">1h ago</p>
+              </div>
+            </a>
+            <a href="booking.html?id=3" class="message-preview-item">
+              <div class="msg-avi" style="background:linear-gradient(135deg,#10B981,#059669);">N</div>
+              <div class="msg-body">
+                <p class="msg-name">Neha Patil</p>
+                <p class="msg-preview">Great work! Left a 5-star review for you 🌟</p>
+              </div>
+              <div class="msg-meta">
+                <p class="msg-time">Yesterday</p>
+              </div>
+            </a>
+            <a href="booking.html?id=5" class="message-preview-item">
+              <div class="msg-avi" style="background:linear-gradient(135deg,#8B5CF6,#6366F1);">V</div>
+              <div class="msg-body">
+                <p class="msg-name">Vijay More</p>
+                <p class="msg-preview">No worries, I'll reach out again next week when I'm ready.</p>
+              </div>
+              <div class="msg-meta">
+                <p class="msg-time">2 days ago</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/dashboard.js"></script>
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+
+  // User menu dropdown
+  const trigger = document.getElementById('userMenuTrigger');
+  const wrapper = document.getElementById('userMenuWrapper');
+  trigger?.addEventListener('click', () => {
+    const open = wrapper.classList.toggle('open');
+    trigger.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', (e) => {
+    if (!wrapper?.contains(e.target)) wrapper?.classList.remove('open');
+  });
+
+  // Logout
+  function doLogout() {
+    localStorage.removeItem('sahayak_token');
+    localStorage.removeItem('sahayak_user');
+    window.location.href = 'login.html';
+  }
+  document.getElementById('logoutBtn')?.addEventListener('click', doLogout);
+  document.getElementById('sidebarLogout')?.addEventListener('click', doLogout);
+
+  // Set today's date
+  document.getElementById('greetDate').textContent = new Date().toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  // Sidebar nav switching
+  document.querySelectorAll('[data-section]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      // All sections would be shown/hidden here by JS
+      document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+
+  // Table filter tabs
+  document.querySelectorAll('.dash-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  // Redirect to login if not authenticated
+  // Uncomment for real auth:
+  // if (!localStorage.getItem('sahayak_token')) window.location.href = 'login.html';
+</script>
+</body>
+</html>

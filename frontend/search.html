@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Services — Sahayak</title>
+  <meta name="description" content="Browse and filter verified local service providers near you. Compare ratings, pricing, and availability." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/search.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="navbar-logo-icon"><img src="Gemini_Generated_Image_cjdzr0cjdzr0cjdz (1).png" alt="Sahayak Logo"></div>
+      <span class="navbar-logo-text">Saha<span>yak</span></span>
+    </a>
+    <div class="navbar-links">
+      <a href="index.html"  class="nav-link">🏠 Home</a>
+      <a href="search.html" class="nav-link active">🔍 Find Services</a>
+    </div>
+    <div class="navbar-actions" id="navActions">
+      <a href="login.html"  class="btn btn-ghost btn-sm">Log In</a>
+      <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"  class="nav-link">🏠 Home</a>
+  <a href="search.html" class="nav-link active">🔍 Find Services</a>
+  <div class="mobile-menu-actions">
+    <a href="login.html"  class="btn btn-secondary btn-full">Log In</a>
+    <a href="signup.html" class="btn btn-primary   btn-full">Sign Up</a>
+  </div>
+</div>
+
+<!-- SEARCH HEADER -->
+<header class="search-header" role="banner">
+  <div class="search-header-inner">
+    <h1 class="search-header-title" id="searchPageTitle">Find Local Services</h1>
+
+    <div class="search-bar-row">
+      <!-- Keyword search -->
+      <div class="search-main-input" id="mainSearchBox">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="searchQuery"
+          placeholder="Search electrician, plumber, maid…"
+          aria-label="Search query"
+        />
+      </div>
+      <!-- Location -->
+      <div class="search-location-input">
+        <span class="pin-icon">📍</span>
+        <input type="text" id="locationInput" placeholder="Enter your city or area" aria-label="Location" />
+      </div>
+      <button class="btn btn-primary" id="searchBtn" type="button">Search</button>
+      <button class="btn btn-secondary filter-toggle-btn" id="filterToggleBtn" type="button" aria-label="Open filters">
+        ⚙️ Filters
+      </button>
+    </div>
+
+    <!-- Active Filter Tags -->
+    <div class="active-filters" id="activeFilters" style="display:none;"></div>
+  </div>
+</header>
+
+<!-- BODY -->
+<div class="search-body">
+
+  <!-- FILTER SIDEBAR (Desktop) -->
+  <aside class="search-sidebar" id="sidebar" aria-label="Filter results">
+    <div class="sidebar-title">
+      Filters
+      <button class="sidebar-clear" id="clearAllFilters" type="button">Clear All</button>
+    </div>
+
+    <!-- Category -->
+    <div class="filter-section">
+      <p class="filter-label">Category</p>
+      <div class="category-chips" id="categoryChips">
+        <div class="category-chip active" data-cat="">✨ All Services<span class="chip-count">2,500</span></div>
+        <div class="category-chip" data-cat="electrician">⚡ Electrician<span class="chip-count">320</span></div>
+        <div class="category-chip" data-cat="plumber">🔧 Plumber<span class="chip-count">280</span></div>
+        <div class="category-chip" data-cat="maid">🧹 Maid<span class="chip-count">450</span></div>
+        <div class="category-chip" data-cat="carpenter">🪚 Carpenter<span class="chip-count">195</span></div>
+        <div class="category-chip" data-cat="painter">🎨 Painter<span class="chip-count">160</span></div>
+        <div class="category-chip" data-cat="ac-repair">❄️ AC Repair<span class="chip-count">210</span></div>
+        <div class="category-chip" data-cat="driver">🚗 Driver<span class="chip-count">375</span></div>
+        <div class="category-chip" data-cat="cook">👨‍🍳 Cook<span class="chip-count">290</span></div>
+        <div class="category-chip" data-cat="gardener">🌿 Gardener<span class="chip-count">140</span></div>
+      </div>
+    </div>
+
+    <!-- Price Range -->
+    <div class="filter-section">
+      <p class="filter-label">Price Range (₹/hr)</p>
+      <div class="price-range-inputs">
+        <div class="price-input-wrap">
+          <span class="input-label">Min</span>
+          <input type="number" id="priceMin" placeholder="0" min="0" />
+        </div>
+        <div class="price-input-wrap">
+          <span class="input-label">Max</span>
+          <input type="number" id="priceMax" placeholder="2000" min="0" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Rating -->
+    <div class="filter-section">
+      <p class="filter-label">Minimum Rating</p>
+      <div class="rating-options">
+        <label class="rating-option">
+          <input type="radio" name="minRating" value="0" checked /> <span class="rating-stars-sm">★★★★★</span><span class="rating-text">Any rating</span>
+        </label>
+        <label class="rating-option">
+          <input type="radio" name="minRating" value="4" /> <span class="rating-stars-sm">★★★★☆</span><span class="rating-text">4+ stars</span>
+        </label>
+        <label class="rating-option">
+          <input type="radio" name="minRating" value="3" /> <span class="rating-stars-sm">★★★☆☆</span><span class="rating-text">3+ stars</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Availability -->
+    <div class="filter-section">
+      <p class="filter-label">Availability</p>
+      <div class="toggle-row">
+        <span class="toggle-label">Available now only</span>
+        <label class="toggle">
+          <input type="checkbox" id="availableNow" />
+          <span class="toggle-track"></span>
+          <span class="toggle-thumb"></span>
+        </label>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-full" id="applyFilters" type="button">Apply Filters</button>
+  </aside>
+
+  <!-- RESULTS AREA -->
+  <section aria-label="Search results">
+    <div class="search-results-header">
+      <p class="results-count" id="resultsCount">Showing <strong>12</strong> providers</p>
+      <div style="display:flex;gap:.75rem;align-items:center;">
+        <select class="sort-select" id="sortSelect" aria-label="Sort results">
+          <option value="rating">⭐ Top Rated</option>
+          <option value="price-asc">💰 Price: Low to High</option>
+          <option value="price-desc">💰 Price: High to Low</option>
+          <option value="nearest">📍 Nearest First</option>
+        </select>
+        <div class="view-toggle" role="group" aria-label="View mode">
+          <button class="view-btn active" id="gridViewBtn" aria-label="Grid view" title="Grid">⊞</button>
+          <button class="view-btn" id="listViewBtn" aria-label="List view" title="List">☰</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Grid -->
+    <div class="results-grid" id="resultsGrid" role="list">
+      <!-- Provider cards injected by JS -->
+    </div>
+
+    <!-- Empty State (hidden by default) -->
+    <div class="empty-state" id="emptyState" style="display:none;" aria-live="polite">
+      <div class="empty-icon">🔍</div>
+      <h2 class="empty-title">No providers found</h2>
+      <p class="empty-desc">Try adjusting your filters or searching a different area.</p>
+      <button class="btn btn-primary" id="clearSearchBtn" type="button">Clear Filters</button>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination" role="navigation" aria-label="Results pages">
+      <button class="page-btn" id="prevPage" disabled aria-label="Previous page">‹</button>
+      <button class="page-btn active" data-page="1">1</button>
+      <button class="page-btn" data-page="2">2</button>
+      <button class="page-btn" data-page="3">3</button>
+      <button class="page-btn" id="nextPage" aria-label="Next page">›</button>
+    </div>
+  </section>
+</div>
+
+<!-- Mobile Filter Drawer -->
+<div class="filter-overlay" id="filterOverlay" aria-hidden="true"></div>
+<div class="filter-drawer" id="filterDrawer" role="dialog" aria-label="Filter options" aria-modal="true">
+  <div class="filter-drawer-header">
+    <p class="filter-drawer-title">Filters</p>
+    <button class="filter-close" id="filterClose" aria-label="Close filters">✕</button>
+  </div>
+  <!-- Mirror sidebar content -->
+  <div id="drawerContent"></div>
+  <button class="btn btn-primary btn-full" id="applyDrawerFilters" style="margin-top:1rem;" type="button">Apply Filters</button>
+</div>
+
+<script src="js/search.js"></script>
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+
+  // Filter drawer toggle
+  const filterToggleBtn = document.getElementById('filterToggleBtn');
+  const filterOverlay   = document.getElementById('filterOverlay');
+  const filterDrawer    = document.getElementById('filterDrawer');
+  const filterClose     = document.getElementById('filterClose');
+
+  function openDrawer() { filterDrawer.classList.add('open'); filterOverlay.style.display = 'block'; }
+  function closeDrawer() { filterDrawer.classList.remove('open'); filterOverlay.style.display = 'none'; }
+
+  filterToggleBtn?.addEventListener('click', openDrawer);
+  filterClose?.addEventListener('click', closeDrawer);
+  filterOverlay?.addEventListener('click', closeDrawer);
+
+  // Category chips
+  document.getElementById('categoryChips').addEventListener('click', (e) => {
+    const chip = e.target.closest('.category-chip');
+    if (!chip) return;
+    document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+  });
+
+  // View toggle
+  document.getElementById('gridViewBtn').addEventListener('click', () => {
+    document.getElementById('resultsGrid').className = 'results-grid';
+    document.getElementById('gridViewBtn').classList.add('active');
+    document.getElementById('listViewBtn').classList.remove('active');
+  });
+  document.getElementById('listViewBtn').addEventListener('click', () => {
+    document.getElementById('resultsGrid').className = 'results-list';
+    document.getElementById('listViewBtn').classList.add('active');
+    document.getElementById('gridViewBtn').classList.remove('active');
+  });
+
+  // Read URL params and pre-fill search
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('q')) document.getElementById('searchQuery').value = urlParams.get('q');
+  if (urlParams.get('category')) {
+    document.querySelectorAll('.category-chip').forEach(c => {
+      c.classList.toggle('active', c.dataset.cat === urlParams.get('category'));
+    });
+  }
+</script>
+</body>
+</html>

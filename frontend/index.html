@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sahayak — Find Trusted Local Service Providers Near You</title>
+  <meta name="description" content="Sahayak connects you with skilled, trusted local service providers — electricians, plumbers, maids, and more. Book in minutes, pay fairly." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+
+<!-- ════════════ NAVBAR ════════════ -->
+<nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo" aria-label="Sahayak Home">
+      <div class="navbar-logo-icon"><img src ="Gemini_Generated_Image_cjdzr0cjdzr0cjdz (1).png"></div>
+      <span class="navbar-logo-text">Saha<span>yak</span></span>
+    </a>
+
+    <div class="navbar-links">
+      <a href="index.html"   class="nav-link active"     id="nav-home">🏠 Home</a>
+      <a href="search.html"  class="nav-link"            id="nav-search">🔍 Find Services</a>
+      <a href="#how-it-works" class="nav-link"           id="nav-how">⚡ How It Works</a>
+    </div>
+
+    <div class="navbar-actions">
+      <a href="login.html"  class="btn btn-ghost btn-sm"  id="nav-login">Log In</a>
+      <a href="signup.html" class="btn btn-primary btn-sm" id="nav-signup">Get Started</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu" role="menu">
+  <a href="index.html"    class="nav-link" role="menuitem">🏠 Home</a>
+  <a href="search.html"   class="nav-link" role="menuitem">🔍 Find Services</a>
+  <a href="#how-it-works" class="nav-link" role="menuitem">⚡ How It Works</a>
+  <div class="mobile-menu-actions">
+    <a href="login.html"  class="btn btn-secondary btn-full" id="mobile-login">Log In</a>
+    <a href="signup.html" class="btn btn-primary   btn-full" id="mobile-signup">Get Started Free</a>
+  </div>
+</div>
+
+<!-- ════════════ HERO ════════════ -->
+<header class="hero" role="banner">
+  <div class="hero-bg">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-grid"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-text fade-up">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Trusted by 10,000+ Families
+      </div>
+
+      <h1 class="hero-title">
+        Find <span class="gradient-text">Skilled Workers</span><br />Near You, Instantly
+      </h1>
+
+      <p class="hero-desc">
+        Connect with verified electricians, plumbers, maids, and more.
+        View pricing, chat directly, and book in minutes — no middlemen.
+      </p>
+
+      <!-- Search Bar -->
+      <div class="hero-search" id="heroSearch" role="search">
+        <select class="hero-search-select" id="categorySelect" aria-label="Service category">
+          <option value="">All Services</option>
+          <option value="electrician">⚡ Electrician</option>
+          <option value="plumber">🔧 Plumber</option>
+          <option value="maid">🧹 Maid / Cleaner</option>
+          <option value="carpenter">🪚 Carpenter</option>
+          <option value="painter">🎨 Painter</option>
+          <option value="ac-repair">❄️ AC Repair</option>
+          <option value="driver">🚗 Driver</option>
+          <option value="gardener">🌿 Gardener</option>
+        </select>
+        <input
+          type="text"
+          class="hero-search-input"
+          id="heroSearchInput"
+          placeholder="Search by name, skill, or service…"
+          aria-label="Search query"
+        />
+        <button class="hero-search-btn" id="heroSearchBtn" type="button">
+          🔍 Search
+        </button>
+      </div>
+
+      <!-- Stats -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-value">5,200+</span>
+          <span class="stat-label">Verified Providers</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">48K+</span>
+          <span class="stat-label">Jobs Completed</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">4.8 ⭐</span>
+          <span class="stat-label">Avg. Rating</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Visual -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-card-stack">
+        <div class="hero-card-bg card-1"></div>
+        <div class="hero-card-bg card-2"></div>
+
+        <div class="hero-card-main">
+          <div class="hero-card-header">
+            <div class="provider-avi">R</div>
+            <div>
+              <p class="hero-card-name">Ramesh Kumar</p>
+              <p class="hero-card-role">Master Electrician · Pune</p>
+            </div>
+          </div>
+          <div class="hero-card-stars">★★★★★</div>
+          <div class="hero-card-skills">
+            <span class="skill-chip">Wiring</span>
+            <span class="skill-chip">Panel Fix</span>
+            <span class="skill-chip">Inverter</span>
+            <span class="skill-chip">CCTV</span>
+          </div>
+          <div class="hero-card-price">
+            <div>
+              <p class="price-label">Starting from</p>
+              <p class="price-value">₹300<span style="font-size:.9rem;font-weight:400;color:var(--text-muted)">/hr</span></p>
+            </div>
+            <a href="profile.html" class="btn btn-primary btn-sm">Book Now</a>
+          </div>
+        </div>
+
+        <div class="hero-float-badge badge-top">
+          <span>✅</span> Verified &amp; Trusted
+        </div>
+        <div class="hero-float-badge badge-bottom">
+          <span>⚡</span> Available Today
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════ CATEGORIES ════════════ -->
+<section class="categories-section" id="categories" aria-labelledby="categories-heading">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">Browse by Category</div>
+      <h2 class="heading-2" id="categories-heading">Every Service You Need</h2>
+      <p class="body-lg mt-2">From quick fixes to long-term help — find the right professional for any job.</p>
+    </div>
+
+    <div class="categories-grid">
+      <a href="search.html?category=electrician" class="category-card fade-up" id="cat-electrician">
+        <div class="category-icon">⚡</div>
+        <p class="category-name">Electrician</p>
+        <p class="category-count">320 providers</p>
+      </a>
+      <a href="search.html?category=plumber" class="category-card fade-up" id="cat-plumber">
+        <div class="category-icon">🔧</div>
+        <p class="category-name">Plumber</p>
+        <p class="category-count">280 providers</p>
+      </a>
+      <a href="search.html?category=maid" class="category-card fade-up" id="cat-maid">
+        <div class="category-icon">🧹</div>
+        <p class="category-name">Maid / Cleaner</p>
+        <p class="category-count">450 providers</p>
+      </a>
+      <a href="search.html?category=carpenter" class="category-card fade-up" id="cat-carpenter">
+        <div class="category-icon">🪚</div>
+        <p class="category-name">Carpenter</p>
+        <p class="category-count">195 providers</p>
+      </a>
+      <a href="search.html?category=painter" class="category-card fade-up" id="cat-painter">
+        <div class="category-icon">🎨</div>
+        <p class="category-name">Painter</p>
+        <p class="category-count">160 providers</p>
+      </a>
+      <a href="search.html?category=ac-repair" class="category-card fade-up" id="cat-ac">
+        <div class="category-icon">❄️</div>
+        <p class="category-name">AC Repair</p>
+        <p class="category-count">210 providers</p>
+      </a>
+      <a href="search.html?category=driver" class="category-card fade-up" id="cat-driver">
+        <div class="category-icon">🚗</div>
+        <p class="category-name">Driver</p>
+        <p class="category-count">375 providers</p>
+      </a>
+      <a href="search.html?category=gardener" class="category-card fade-up" id="cat-gardener">
+        <div class="category-icon">🌿</div>
+        <p class="category-name">Gardener</p>
+        <p class="category-count">140 providers</p>
+      </a>
+      <a href="search.html?category=cook" class="category-card fade-up" id="cat-cook">
+        <div class="category-icon">👨‍🍳</div>
+        <p class="category-name">Cook</p>
+        <p class="category-count">290 providers</p>
+      </a>
+      <a href="search.html?category=pest-control" class="category-card fade-up" id="cat-pest">
+        <div class="category-icon">🐛</div>
+        <p class="category-name">Pest Control</p>
+        <p class="category-count">85 providers</p>
+      </a>
+      <a href="search.html?category=security" class="category-card fade-up" id="cat-security">
+        <div class="category-icon">🔐</div>
+        <p class="category-name">Security Guard</p>
+        <p class="category-count">120 providers</p>
+      </a>
+      <a href="search.html" class="category-card fade-up" id="cat-more">
+        <div class="category-icon">✨</div>
+        <p class="category-name">View All</p>
+        <p class="category-count">2,500+ providers</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ HOW IT WORKS ════════════ -->
+<section class="how-it-works" id="how-it-works" aria-labelledby="how-heading">
+  <div class="container">
+    <div class="section-header text-center fade-up">
+      <div class="section-label">Simple Process</div>
+      <h2 class="heading-2" id="how-heading">Book a Service in 3 Steps</h2>
+      <p class="body-lg mt-2">No phone calls, no chasing — everything handled in the app.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card fade-up">
+        <div class="step-number">1</div>
+        <div class="step-icon-wrap">🔍</div>
+        <h3 class="step-title">Search & Filter</h3>
+        <p class="step-desc">Browse verified providers by category, location, rating, and price. Find exactly who you need.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-number">2</div>
+        <div class="step-icon-wrap">💬</div>
+        <h3 class="step-title">Chat & Negotiate</h3>
+        <p class="step-desc">Message the provider directly, discuss your requirements, and agree on a fair price — no middlemen.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-number">3</div>
+        <div class="step-icon-wrap">✅</div>
+        <h3 class="step-title">Book & Review</h3>
+        <p class="step-desc">Confirm your booking with one click. After the job, leave a review to help others in the community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FEATURED PROVIDERS ════════════ -->
+<section class="featured-section" aria-labelledby="featured-heading">
+  <div class="container">
+    <div class="section-header flex justify-between items-center fade-up" style="flex-wrap:wrap;gap:1rem;">
+      <div>
+        <div class="section-label">Top Rated</div>
+        <h2 class="heading-2" id="featured-heading">Featured Providers</h2>
+      </div>
+      <a href="search.html" class="btn btn-secondary">View All →</a>
+    </div>
+
+    <div class="providers-grid">
+      <!-- Card 1 -->
+      <a href="profile.html?id=1" class="provider-card fade-up" id="prov-1">
+        <div class="provider-card-header">
+          <div class="provider-card-avi" style="background:linear-gradient(135deg,#F59E0B,#D97706)">R</div>
+          <div class="provider-card-info">
+            <p class="provider-card-name">Ramesh Kumar</p>
+            <p class="provider-card-category">⚡ Electrician · Pune</p>
+          </div>
+          <div style="margin-left:auto">
+            <span class="badge badge-success">Available</span>
+          </div>
+        </div>
+        <div class="provider-card-rating">
+          <span class="rating-stars">★★★★★</span>
+          <span class="rating-value">4.9</span>
+          <span class="rating-count">(142 reviews)</span>
+        </div>
+        <div class="provider-card-location">
+          <span>📍</span> Kothrud, Pune · 2.1 km away
+        </div>
+        <div class="provider-card-skills">
+          <span class="badge badge-muted">Wiring</span>
+          <span class="badge badge-muted">Panel Fix</span>
+          <span class="badge badge-muted">CCTV</span>
+        </div>
+        <div class="provider-card-footer">
+          <div>
+            <span class="provider-price-label">Starting at</span>
+            <span class="provider-price">₹300/hr</span>
+          </div>
+          <span class="btn btn-primary btn-sm">Book Now</span>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="profile.html?id=2" class="provider-card fade-up" id="prov-2">
+        <div class="provider-card-header">
+          <div class="provider-card-avi" style="background:linear-gradient(135deg,#3B82F6,#6366F1)">P</div>
+          <div class="provider-card-info">
+            <p class="provider-card-name">Priya Sharma</p>
+            <p class="provider-card-category">🧹 House Cleaner · Mumbai</p>
+          </div>
+          <div style="margin-left:auto">
+            <span class="badge badge-success">Available</span>
+          </div>
+        </div>
+        <div class="provider-card-rating">
+          <span class="rating-stars">★★★★★</span>
+          <span class="rating-value">4.8</span>
+          <span class="rating-count">(98 reviews)</span>
+        </div>
+        <div class="provider-card-location">
+          <span>📍</span> Andheri West, Mumbai · 1.4 km
+        </div>
+        <div class="provider-card-skills">
+          <span class="badge badge-muted">Deep Clean</span>
+          <span class="badge badge-muted">Kitchen</span>
+          <span class="badge badge-muted">Laundry</span>
+        </div>
+        <div class="provider-card-footer">
+          <div>
+            <span class="provider-price-label">Starting at</span>
+            <span class="provider-price">₹200/hr</span>
+          </div>
+          <span class="btn btn-primary btn-sm">Book Now</span>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="profile.html?id=3" class="provider-card fade-up" id="prov-3">
+        <div class="provider-card-header">
+          <div class="provider-card-avi" style="background:linear-gradient(135deg,#10B981,#059669)">M</div>
+          <div class="provider-card-info">
+            <p class="provider-card-name">Mohammed Ali</p>
+            <p class="provider-card-category">🔧 Plumber · Delhi</p>
+          </div>
+          <div style="margin-left:auto">
+            <span class="badge badge-muted">Busy</span>
+          </div>
+        </div>
+        <div class="provider-card-rating">
+          <span class="rating-stars">★★★★☆</span>
+          <span class="rating-value">4.6</span>
+          <span class="rating-count">(76 reviews)</span>
+        </div>
+        <div class="provider-card-location">
+          <span>📍</span> Lajpat Nagar, Delhi · 3.2 km
+        </div>
+        <div class="provider-card-skills">
+          <span class="badge badge-muted">Pipe Fit</span>
+          <span class="badge badge-muted">Drainage</span>
+          <span class="badge badge-muted">RO Install</span>
+        </div>
+        <div class="provider-card-footer">
+          <div>
+            <span class="provider-price-label">Starting at</span>
+            <span class="provider-price">₹350/hr</span>
+          </div>
+          <span class="btn btn-secondary btn-sm">View Profile</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CTA BANNER ════════════ -->
+<section class="cta-banner" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="cta-inner fade-up">
+      <div class="section-label" style="margin-inline:auto;width:fit-content;">Join Sahayak</div>
+      <h2 class="cta-title" id="cta-heading">Are You a Skilled <span class="gradient-text">Service Provider?</span></h2>
+      <p class="cta-desc">List your skills, set your pricing, and start earning from customers in your area. It's free to join.</p>
+      <div class="cta-btns">
+        <a href="signup.html?role=provider" class="btn btn-primary btn-lg" id="cta-provider-signup">
+          🚀 Join as Provider
+        </a>
+        <a href="signup.html?role=customer" class="btn btn-secondary btn-lg" id="cta-customer-signup">
+          🔍 Find Services
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="navbar-logo">
+          <div class="navbar-logo-icon" style="width:34px;height:34px;font-size:16px;">🔧</div>
+          <span class="navbar-logo-text" style="font-size:1.1rem;">Saha<span>yak</span></span>
+        </a>
+        <p class="footer-brand-desc">India's trusted platform for connecting customers with verified local service providers. Built for bharat, by bharat.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-btn" aria-label="Instagram">📷</a>
+          <a href="#" class="social-btn" aria-label="Facebook">𝒇</a>
+          <a href="#" class="social-btn" aria-label="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Services</p>
+        <div class="footer-links">
+          <a href="search.html?category=electrician" class="footer-link">Electricians</a>
+          <a href="search.html?category=plumber"     class="footer-link">Plumbers</a>
+          <a href="search.html?category=maid"        class="footer-link">Maids</a>
+          <a href="search.html?category=carpenter"   class="footer-link">Carpenters</a>
+          <a href="search.html"                      class="footer-link">View All →</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Company</p>
+        <div class="footer-links">
+          <a href="#" class="footer-link">About Us</a>
+          <a href="#" class="footer-link">How It Works</a>
+          <a href="#" class="footer-link">Blog</a>
+          <a href="#" class="footer-link">Careers</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Support</p>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Help Center</a>
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+          <a href="#" class="footer-link">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Sahayak. All rights reserved. Made with ❤️ in India.</p>
+      <p>🇮🇳 Proudly serving 50+ cities</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════ SCRIPTS ════════════ -->
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+  // Close mobile menu on outside click
+  document.addEventListener('click', (e) => {
+    if (!navbar.contains(e.target) && !mobileMenu.contains(e.target)) {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+    }
+  });
+
+  // Hero search redirect
+  document.getElementById('heroSearchBtn').addEventListener('click', () => {
+    const category = document.getElementById('categorySelect').value;
+    const query    = document.getElementById('heroSearchInput').value.trim();
+    let url = 'search.html';
+    const params = [];
+    if (category) params.push(`category=${encodeURIComponent(category)}`);
+    if (query)    params.push(`q=${encodeURIComponent(query)}`);
+    if (params.length) url += '?' + params.join('&');
+    window.location.href = url;
+  });
+
+  document.getElementById('heroSearchInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') document.getElementById('heroSearchBtn').click();
+  });
+
+  // Scroll fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up, .fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
